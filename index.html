@@ -11,23 +11,14 @@
         <h1>House Price Prediction Project</h1>
         <p class="intro">Predicting house prices is a critical task in the real estate industry, as it directly impacts buyers, sellers, and investors.</p>
     </header>
-    <section class="project-details">
-    <h2>Project Overview</h2>
-    <p>The goal of this project is to develop a predictive model that accurately estimates the sale price of residential properties in Ames, Iowa. This challenge is particularly significant given the wide range of factors that can influence property prices, from physical characteristics to neighborhood features.</p>
-    
-    <h2>Dataset</h2>
-    <p>The dataset used in this project comes from the Kaggle competition titled “House Prices: Advanced Regression Techniques.” It contains 79 explanatory variables that describe almost every aspect of residential homes in Ames, Iowa. These features include lot size, building dimensions, year built, quality ratings, and more. The competition challenges participants to predict the final sale price of each house based on these variables. The dataset was compiled by Dean De Cock for educational purposes and serves as a modern alternative to the Boston Housing dataset.</p>
-    
-    <h2>Objective</h2>
+    <section class="introduction">
+    <h2>Introduction</h2>
+    <p>Predicting house prices is a critical task in the real estate industry, as it directly impacts buyers, sellers, and investors. The goal of this project is to develop a predictive model that accurately estimates the sale price of residential properties in Ames, Iowa. This challenge is particularly significant given the wide range of factors that can influence property prices, from physical characteristics to neighborhood features.</p>
+    <p>The dataset used in this project comes from the Kaggle competition titled “House Prices: Advanced Regression Techniques.” It contains 1460 rows and 81 columns, with 79 explanatory variables that describe almost every aspect of residential homes in Ames, Iowa. These features include lot size, building dimensions, year built, quality ratings, and more. The competition challenges participants to predict the final sale price of each house based on these variables. The dataset was compiled by Dean De Cock for educational purposes and serves as a modern alternative to the Boston Housing dataset.</p>
     <p>The project’s objective is to predict the sale price of each house given its features. The predictions are evaluated using Root Mean Squared Error (RMSE) between the logarithm of the predicted and actual sale prices. Using logarithms ensures that errors in predicting both expensive and inexpensive houses are treated equally, preventing bias toward high-priced properties.</p>
-    
-    <h2>Regression Techniques</h2>
     <p>Regression analysis is at the core of this project, as it is well-suited for predicting continuous numerical values such as house prices. In regression, a mathematical model is constructed to estimate the relationship between one or more independent variables (features) and a dependent variable (sale price). One commonly used regression technique is linear regression, which models the relationship between the dependent and independent variables as a linear combination of the input features. However, more advanced techniques like random forest regression and gradient boosting regression can also be applied to capture complex patterns and interactions within the data. These techniques build multiple decision trees and combine their outputs to achieve better accuracy and robustness.</p>
-    
-    <h2>Project Goal</h2>
     <p>By leveraging feature engineering and advanced regression techniques, this project aims to create a reliable model that accurately predicts house prices, offering valuable insights for real estate professionals and stakeholders.</p>
-</section>
-
+    </section>
     <section class="data-preprocessing">
     <h2>Data Preprocessing</h2>
     <p>As with any data science project, data preprocessing is an essential step to ensure that the dataset is clean, consistent, and ready for the next phase—modeling. For this project, I began by addressing missing values, which are a common issue in real-world datasets. I noticed that some columns had a significant number of missing values, so I decided to remove any features with more than 45% missing data from both the training and testing datasets. This decision was made to keep only the most informative features, ensuring that the dataset remained manageable and relevant for the analysis.</p>
