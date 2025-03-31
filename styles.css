@@ -92,12 +92,10 @@ code {
     padding: 0.4rem 0.8rem;
     border-radius: 5px;
     color: #333;
-}
-
-/* Visual Enhancements for Specific Sections */
+/* radom forest background*/
 .random-forest-section {
     border: 2px solid #2980B9;
-    background-color: #ecf4f8;
+    background-color: white;  /* Change from #ecf4f8 to white */
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 20px;
