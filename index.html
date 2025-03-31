@@ -173,55 +173,17 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
     <p>In summary, the Decision Tree Regressor provides a useful model for predicting housing prices, with a clear path for improving its performance through parameter tuning.</p>
 </section>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Forest Regressor: Model Evaluation and Hyperparameter Tuning</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <h1>Random Forest Regressor: Model Evaluation and Hyperparameter Tuning</h1>
-    </header>
+<section class="random-forest-section">
+    <h2>Random Forest Model</h2>
+    <p>The Random Forest model was the most effective model in predicting house prices due to its ability to handle complex relationships between the features. Random Forest builds multiple decision trees and combines their predictions to improve accuracy. This technique reduced overfitting, making it a robust choice for predicting house prices.</p>
     
-    <section class="content">
-        <p>In this section, we applied the Random Forest Regressor to predict housing prices, leveraging its ability to handle complex relationships in the data. We began by training the model on the selected features from the dataset and evaluating its performance using several regression metrics.</p>
-        
-        <p>The Random Forest model, initialized with 100 estimators, was trained on the training set and evaluated on the test set. The results revealed the following:</p>
-        
-        <ul>
-            <li><strong>Mean Absolute Error (MAE)</strong>: 16,764.3248</li>
-            <li><strong>Root Mean Squared Error (RMSE)</strong>: 29,409.7941</li>
-            <li><strong>R² Score</strong>: 0.8872</li>
-        </ul>
-
-        <p>These metrics show that the Random Forest model captures a substantial portion of the variance in housing prices, with a relatively low error rate and a high R² score, indicating good predictive accuracy.</p>
-
-        <p>To further improve the model, we performed hyperparameter tuning using GridSearchCV. We defined a parameter grid that included variations in the number of estimators, maximum depth, minimum samples for splitting, and other hyperparameters. After running the grid search, the best model was identified with the following hyperparameters:</p>
-        
-        <ul>
-            <li><strong>Bootstrap</strong>: False</li>
-            <li><strong>Max Depth</strong>: None</li>
-            <li><strong>Max Features</strong>: 'sqrt'</li>
-            <li><strong>Min Samples Leaf</strong>: 1</li>
-            <li><strong>Min Samples Split</strong>: 2</li>
-            <li><strong>Number of Estimators</strong>: 300</li>
-        </ul>
-
-        <p>This optimized model achieved the best MAE of 16,864.1182, further improving the model's performance.</p>
-
-        <p>The final evaluation of the tuned model on the test set produced the following results:</p>
-        
-        <ul>
-            <li><strong>Mean Absolute Error (MAE)</strong>: 16,764.3248</li>
-            <li><strong>Root Mean Squared Error (RMSE)</strong>: 29,409.7941</li>
-            <li><strong>R² Score</strong>: 0.8872</li>
-        </ul>
-
-        <p>These results confirm the efficacy of the Random Forest Regressor for predicting housing prices, showing significant improvement after hyperparameter tuning. The model is robust, with high accuracy and low error rates, making it a valuable tool for price prediction in this dataset.</p>
-    </section>
+    <p>Key points observed in the performance of the Random Forest model:</p>
+    <ul>
+        <li><strong>Improved accuracy:</strong> The Random Forest model showed significantly lower RMSE, demonstrating its superior predictive power compared to other models.</li>
+        <li><strong>Robustness to overfitting:</strong> Unlike the Decision Tree model, which tends to overfit the data, Random Forest handles variability in the dataset and generalizes better.</li>
+        <li><strong>Better feature selection:</strong> Random Forest is capable of identifying the most important features automatically, improving its efficiency and predictive power.</li>
+    </ul>
+</section>
     <section class="impact">
     <h2>Impact</h2>
     <p>The impact of this project is significant, particularly for professionals within the real estate sector. By accurately predicting housing prices, the model offers a reliable tool for real estate investors, buyers, and sellers. It can help streamline the pricing process, providing stakeholders with data-driven insights to make informed decisions. Furthermore, the use of advanced regression techniques allows for a more nuanced understanding of the factors that influence housing prices, such as neighborhood features, property condition, and market trends. As a result, the model can drive better predictions, contributing to more efficient property evaluations.</p>
