@@ -235,14 +235,19 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 <section class="conclusion">
     <h2>Conclusion</h2>
-    <p>In conclusion, this project demonstrates the application of machine learning techniques to predict housing prices using a comprehensive dataset from Ames, Iowa. By implementing advanced regression models, such as Random Forest and Gradient Boosting, the model accurately predicts housing prices, providing valuable insights to stakeholders in the real estate industry. The results highlight the importance of feature engineering, model selection, and hyperparameter tuning in achieving optimal performance.</p>
-    
-    <p>While the model shows strong predictive capabilities, there are challenges, such as dataset-specific limitations and potential biases in the data, that need to be addressed for broader applicability. Future improvements could involve expanding the dataset to include more diverse geographical areas, incorporating additional features, and addressing biases in the data to improve fairness and accuracy.</p>
-    
-    <p>Ultimately, the successful implementation of machine learning in this project not only offers practical applications for real estate but also contributes to the growing field of predictive analytics, showcasing the power of machine learning to solve real-world problems.</p>
+    <p>In this project, three regression models—K-Nearest Neighbors (KNN), Decision Tree, and Random Forest—were evaluated for predicting house prices based on a variety of features. After training and testing each model, it became clear that the <strong>Random Forest</strong> model outperformed the others in terms of prediction accuracy, as measured by the <strong>Root Mean Squared Error (RMSE)</strong>.</p>
+
+    <p>The Decision Tree, while offering some accuracy, showed a tendency to overfit, especially with more complex features, which led to less consistent performance on unseen data. On the other hand, KNN struggled with scalability, particularly as the dataset's feature set grew, which affected its ability to make reliable predictions across different house price ranges.</p>
+
+    <p>In contrast, <strong>Random Forest</strong> effectively handled the data's complexity by building multiple decision trees and averaging their predictions. This ensemble approach helped to reduce overfitting, capture intricate relationships between features, and ultimately produce a more accurate model. The lower RMSE values demonstrated the model's ability to generalize better to new data, making it the most reliable and robust model for predicting house prices in this case.</p>
+
+    <p>Thus, the Random Forest model emerged as the best performer, offering a balance of high accuracy, interpretability, and resistance to overfitting, which is crucial for real-world applications like real estate price prediction.</p>
+
+    <p><em>Special thanks to <a href="https://chat.openai.com/">ChatGPT</a> for assisting with formatting and structuring the conclusion section of this report.</em></p>
 </section>
+
     <footer>
-        <p>&copy; 2025 Your Name. All Rights Reserved.</p>
+        <p>&copy; 2025 Tommie Clark. All Rights Reserved.</p>
     </footer>
 </body>
 </html>
