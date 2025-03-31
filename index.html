@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Prediction Project</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>House Price Prediction Project</h1>
+        <p class="intro">Predicting house prices is a critical task in the real estate industry, as it directly impacts buyers, sellers, and investors.</p>
+    </header>
+    <section class="project-description">
+        <h2>Project Overview</h2>
+        <p>The goal of this project is to develop a predictive model that accurately estimates the sale price of residential properties in Ames, Iowa. This challenge is particularly significant given the wide range of factors that can influence property prices, from physical characteristics to neighborhood features.</p>
+    </section>
+    <section class="dataset-description">
+        <h2>Dataset</h2>
+        <p>The dataset used in this project comes from the Kaggle competition titled “House Prices: Advanced Regression Techniques.” It contains 79 explanatory variables that describe almost every aspect of residential homes in Ames, Iowa. These features include lot size, building dimensions, year built, quality ratings, and more. The competition challenges participants to predict the final sale price of each house based on these variables. The dataset was compiled by Dean De Cock for educational purposes and serves as a modern alternative to the Boston Housing dataset.</p>
+    </section>
+    <section class="objective-description">
+        <h2>Objective</h2>
+        <p>The project’s objective is to predict the sale price of each house given its features. The predictions are evaluated using Root Mean Squared Error (RMSE) between the logarithm of the predicted and actual sale prices. Using logarithms ensures that errors in predicting both expensive and inexpensive houses are treated equally, preventing bias toward high-priced properties.</p>
+    </section>
+    <section class="regression-techniques">
+        <h2>Regression Techniques</h2>
+        <p>Regression analysis is at the core of this project, as it is well-suited for predicting continuous numerical values such as house prices. In regression, a mathematical model is constructed to estimate the relationship between one or more independent variables (features) and a dependent variable (sale price). One commonly used regression technique is linear regression, which models the relationship between the dependent and independent variables as a linear combination of the input features. However, more advanced techniques like random forest regression and gradient boosting regression can also be applied to capture complex patterns and interactions within the data. These techniques build multiple decision trees and combine their outputs to achieve better accuracy and robustness.</p>
+    </section>
+    <section class="goal">
+        <h2>Project Goal</h2>
+        <p>By leveraging feature engineering and advanced regression techniques, this project aims to create a reliable model that accurately predicts house prices, offering valuable insights for real estate professionals and stakeholders.</p>
+    </section>
+    <section class="data-preprocessing">
+    <h2>Data Preprocessing</h2>
+    <p>As with any data science project, data preprocessing is an essential step to ensure that the dataset is clean, consistent, and ready for the next phase—modeling. For this project, I began by addressing missing values, which are a common issue in real-world datasets. I noticed that some columns had a significant number of missing values, so I decided to remove any features with more than 45% missing data from both the training and testing datasets. This decision was made to keep only the most informative features, ensuring that the dataset remained manageable and relevant for the analysis.</p>
+    <p>For features like LotFrontage, which had a substantial number of missing values but still contained important information, I chose to fill in the missing values with the median. This strategy helped preserve the data’s distribution, while minimizing the potential bias that could arise from missing data. For categorical features with missing values, such as GarageType and BsmtQual, I filled the missing entries with the most frequent value, or mode. This ensured that no valuable categorical data was lost, keeping the dataset complete.</p>
+    <p>Next, I turned my attention to non-informative columns. In any machine learning model, it’s critical to remove features that don’t contribute meaningfully to the prediction task. For example, columns like Id, Street, and LotShape were dropped because they didn’t have any predictive power for the target variable, SalePrice. Removing these columns helped streamline the dataset and made it easier for the model to focus on the more important features.</p>
+    <p>I also noticed that certain columns, such as Condition1 and Condition2, had nearly identical values for the majority of the entries, indicating that they had little to no variance. Since these features were almost always set to “Normal,” they were removed, as they wouldn't provide any valuable insights for the regression analysis.</p>
+    <p>Finally, I tackled the categorical variables by one-hot encoding them. This process converted categorical variables into numerical ones, making them usable in the regression model. To avoid multicollinearity, I dropped the first category in each feature. An important transformation was made to the Neighborhood feature. Instead of keeping it as a categorical variable, I replaced it with the average house price for each neighborhood. This encoding allowed the model to capture the influence of different neighborhoods on house prices more effectively.</p>
+    <p>By following these steps, I ensured that the dataset was not only clean and consistent, but also structured in a way that maximized its predictive power for the regression analysis. The dataset was now ready, with only the most relevant and informative features, for the next steps in the project.</p>
+</section>
+<section class="correlation-matrix">
+    <h2>Correlation Matrix and Heatmap</h2>
+    <p>As part of the data exploration phase, we calculated the correlation matrix to understand the relationships between various features in the dataset. The correlation matrix was used to determine how strongly different features are related to each other, especially to the target variable, <strong>SalePrice</strong>.</p>
+    <p>A heatmap was generated to visualize the correlation matrix, offering a clear view of how each feature correlates with the others. This visual representation helps identify highly correlated features, which could be important for model building, and also reveals any potential multicollinearity.</p>
+    
+    <p>From the heatmap, we observe:</p>
+    <ul>
+        <li><strong>OverallQual</strong> has a strong positive correlation with SalePrice (0.79), suggesting that the overall quality of the house is a significant predictor of its price.</li>
+        <li><strong>YearBuilt</strong> and <strong>YearRemodAdd</strong> are also positively correlated with SalePrice, indicating that newer houses or those that have been remodeled tend to have higher prices.</li>
+        <li><strong>LotFrontage</strong> shows a moderate correlation with SalePrice (0.22), suggesting that the size of the lot may play a role in pricing, though it is not as strongly predictive as other features.</li>
+        <li>The heatmap also highlights other feature relationships, such as the interactions between different basement finish types and the influence of the <strong>Neighborhood_Encoded</strong> variable on house prices.</li>
+    </ul>
+
+    <p>By visualizing the correlation matrix, we can make informed decisions about which features to prioritize and which might be dropped or combined due to high correlation with others, improving the efficiency of model training.</p>
+    
+    <!-- Include the heatmap image here -->
+    <img src="correlation_heatmap.png" alt="Correlation Heatmap" class="heatmap-image">
+</section>
+<section class="vif-calculation">
+    <h2>Variance Inflation Factor (VIF) Calculation</h2>
+    <p>To assess potential multicollinearity among the features in our dataset, we calculated the Variance Inflation Factor (VIF) for each numerical feature. VIF helps determine how much the variance of a regression coefficient is inflated due to collinearity with other features. High VIF values indicate that a feature is highly correlated with other features, which can potentially impact the stability and interpretability of regression models.</p>
+    
+    <p>We followed these steps to calculate and interpret the VIF:</p>
+    <ul>
+        <li><strong>Numerical Feature Selection:</strong> We selected only the numerical features from the dataset, excluding the target variable, <strong>SalePrice</strong>. This allowed us to focus on the independent variables.</li>
+        <li><strong>VIF Calculation:</strong> Using the <code>variance_inflation_factor</code> function from the statsmodels library, we calculated the VIF for each numerical feature.</li>
+        <li><strong>Result Interpretation:</strong> Several features exhibited infinite VIF values, which typically occur when there is perfect collinearity among those features. For example, features such as <strong>BsmtFinSF1</strong>, <strong>GrLivArea</strong>, <strong>1stFlrSF</strong>, and <strong>Exterior1st_CBlock</strong> had infinite VIFs, suggesting multicollinearity among them.</li>
+        <li><strong>Identifying High VIF Features:</strong> We filtered the VIF results to identify features with a VIF greater than 25, a commonly used threshold for indicating significant multicollinearity. Several features surpassed this threshold, including:
+            <ul>
+                <li><strong>MSSubClass</strong>, <strong>OverallQual</strong>, <strong>OverallCond</strong>, <strong>YearBuilt</strong>, and <strong>YearRemodAdd</strong>, with VIFs greater than 25.</li>
+                <li><strong>GrLivArea</strong>, <strong>BsmtFinSF1</strong>, <strong>1stFlrSF</strong>, and <strong>TotalBsmtSF</strong> exhibited infinite VIF values, indicating perfect multicollinearity.</li>
+                <li>Several other features, including <strong>Exterior1st_CBlock</strong>, <strong>GarageCars</strong>, and <strong>MSZoning_RL</strong>, also had high VIF values.</li>
+            </ul>
+        </li>
+        <li><strong>Actionable Insights:</strong> Features with high VIF values can negatively impact the performance of regression models by introducing instability. We may need to consider:
+            <ul>
+                <li>Removing or combining highly collinear features.</li>
+                <li>Using regularization techniques such as Ridge regression to mitigate the impact of multicollinearity.</li>
+            </ul>
+        </li>
+    </ul>
+    
+    <p>The VIF results were saved in a CSV file (<code>vif_output.csv</code>) for further reference. By sorting the results, we were able to identify the most problematic features based on their VIF values.</p>
+</section>
+<section class="data-splitting">
+    <h2>Data Splitting: Training and Test Sets</h2>
+    <p>With the data prepared, we're now ready to split it into <strong>training</strong> and <strong>test sets</strong>. This is a critical step in machine learning, as it helps ensure that the model learns from one portion of the data and is evaluated on another. By doing this, we can assess how well the model will generalize to new, unseen data, thus preventing overfitting.</p>
+    
+    <h3>Defining the Features and Target Variable</h3>
+    <p>Before splitting, we first define the <strong>features (X)</strong> and the <strong>target variable (y)</strong>:</p>
+    <ul>
+        <li><strong>Target variable (<code>y</code>)</strong>: <code>SalePrice</code> – this is the column we aim to predict.</li>
+        <li><strong>Features (<code>X</code>)</strong>: All the other columns that will be used to predict <code>SalePrice</code>.</li>
+    </ul>
+    
+    <h3>Splitting the Data into Training and Test Sets</h3>
+    <p>Once the features and target are defined, we split the data into <strong>training</strong> and <strong>testing</strong> sets. Typically, 80% of the data is used for training the model, and the remaining 20% is reserved for testing. This ensures that the model is trained on a large portion of the data but still has unseen data available to evaluate its performance.</p>
+    
+    <p>Here’s how the data is split:</p>
+    <pre><code class="python">
+# Define features and target variable
+X = train_df.drop('SalePrice', axis=1)  # Features (all columns except 'SalePrice')
+y = train_df['SalePrice']  # Target variable ('SalePrice')
+
+# Split the data into training and testing sets
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    </code></pre>
+
+    <p>After this split, we have:</p>
+    <ul>
+        <li><strong><code>X_train</code>, <code>y_train</code></strong>: The data used to train the model.</li>
+        <li><strong><code>X_test</code>, <code>y_test</code></strong>: The data used to evaluate the model’s performance.</li>
+    </ul>
+    
+    <p>This process sets the stage for training the model on the <code>X_train</code> and <code>y_train</code> data and later testing it on <code>X_test</code> and <code>y_test</code> to validate how well it generalizes.</p>
+</section>
+<section class="knn-model">
+    <h2>K-Nearest Neighbors (KNN) Model for Predicting SalePrice</h2>
+    <p>After performing feature selection with Recursive Feature Elimination (RFE), we were able to identify the most significant features that contribute to predicting the target variable, <strong>SalePrice</strong>. These selected features include <code>LotFrontage</code>, <code>OverallQual</code>, <code>TotalBsmtSF</code>, <code>1stFlrSF</code>, <code>2ndFlrSF</code>, <code>GrLivArea</code>, <code>GarageArea</code>, and <code>Neighborhood_Encoded</code>.</p>
+
+    <p>With the features in hand, we now move on to training our model. For this task, we chose the <strong>K-Nearest Neighbors (KNN)</strong> algorithm. KNN is a powerful model that makes predictions based on the proximity of data points in the feature space. It works by finding the most similar points to a given input and averaging their output values, making it an ideal choice for regression problems like predicting housing prices.</p>
+
+    <p>Before training the model, we standardized the features using <strong>StandardScaler</strong> to ensure that all variables are on the same scale, which is important for KNN since it relies on distance metrics. After scaling, we trained the model with a selected value of <code>k=5</code> (the number of neighbors to consider), as this gave us a balance between model complexity and performance.</p>
+
+    <h3>Model Evaluation</h3>
+    <p>We then evaluated the performance of the model on the training set using common regression metrics. The results were as follows:</p>
+    <ul>
+        <li><strong>MAE (Mean Absolute Error)</strong>: 16,656.4762</li>
+        <li><strong>RMSE (Root Mean Squared Error)</strong>: 27,821.8354</li>
+        <li><strong>R² Score</strong>: 0.8773</li>
+    </ul>
+    <p>These metrics show a promising model with relatively low error and a high R² score, indicating that KNN captures a substantial portion of the variance in the housing prices.</p>
+
+    <h3>Optimization of k</h3>
+    <p>To further fine-tune the model, we tested various values of <code>k</code> to determine the optimal number of neighbors. The plot of <strong>MSE vs k</strong> showed that the lowest error occurred at <code>k=5</code>, confirming that this choice of <code>k</code> was the most effective for this particular dataset.</p>
+
+    <!-- KNN plot visualization -->
+    <h3>Model Performance Plot</h3>
+    <p>The plot below visualizes the relationship between the Mean Squared Error (MSE) and the number of neighbors, <code>k</code>. As shown, the optimal value of <code>k</code> is 5, where the model achieves the lowest error.</p>
+    <div class="knn-plot">
+        <img src="knn_mse_vs_k.png" alt="KNN MSE vs k plot" />
+    </div>
+
+    <p>In summary, the KNN model, with its optimized parameters and carefully selected features, provides a robust solution for predicting housing prices in this dataset.</p>
+</section>
+<section class="decision-tree-model">
+    <h2>Decision Tree Regressor for Predicting SalePrice</h2>
+    <p>After selecting the most significant features using Recursive Feature Elimination (RFE), we focused on building a predictive model for the target variable, <strong>SalePrice</strong>. For this task, we chose to apply the <strong>Decision Tree Regressor</strong>, a versatile model known for its ability to handle non-linear relationships in data.</p>
+
+    <p>We began by ensuring that both the training and testing datasets contained only the selected features. These features include <code>LotArea</code>, <code>OverallQual</code>, <code>YearRemodAdd</code>, <code>BsmtFinSF1</code>, <code>BsmtUnfSF</code>, <code>1stFlrSF</code>, <code>GarageArea</code>, and <code>Neighborhood_Encoded</code>. The Decision Tree Regressor was then initialized with a maximum depth of 7 to prevent overfitting while capturing the main patterns in the data.</p>
+
+    <h3>Model Evaluation</h3>
+    <p>After training the model on the selected features, we made predictions on the test set and evaluated the model's performance using common regression metrics:</p>
+    <ul>
+        <li><strong>Mean Absolute Error (MAE)</strong>: 24,913.0290</li>
+        <li><strong>Root Mean Squared Error (RMSE)</strong>: 39,985.5861</li>
+        <li><strong>R² Score</strong>: 0.7916</li>
+    </ul>
+    <p>These results indicate that while the model explains a substantial portion of the variance (<code>R² = 0.7916</code>), there is still room for improvement, as evidenced by the relatively high MAE and RMSE values. Nonetheless, the Decision Tree Regressor provides a useful starting point for making predictions on housing prices, and further tuning could potentially improve its performance.</p>
+
+    <h3>Decision Tree Visualization</h3>
+    <p>Below is a visualization of the decision tree model, showing how the model makes decisions based on the feature values.</p>
+    
+    <!-- Decision Tree Plot Visualization -->
+    <div class="decision-tree-plot">
+        <img src="decision_tree_plot.png" alt="Decision Tree Regressor plot" />
+    </div>
+
+    <h3>Feature Importance</h3>
+    <p>The following chart shows the importance of each feature in the model, highlighting which features had the most impact on predicting <strong>SalePrice</strong>.</p>
+
+    <!-- Feature Importance Plot -->
+    <div class="feature-importance-plot">
+        <img src="feature_importance_plot.png" alt="Decision Tree Feature Importance" />
+    </div>
+
+    <p>In summary, the Decision Tree Regressor provides a useful model for predicting housing prices, with a clear path for improving its performance through parameter tuning.</p>
+</section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Forest Regressor: Model Evaluation and Hyperparameter Tuning</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Random Forest Regressor: Model Evaluation and Hyperparameter Tuning</h1>
+    </header>
+    
+    <section class="content">
+        <p>In this section, we applied the Random Forest Regressor to predict housing prices, leveraging its ability to handle complex relationships in the data. We began by training the model on the selected features from the dataset and evaluating its performance using several regression metrics.</p>
+        
+        <p>The Random Forest model, initialized with 100 estimators, was trained on the training set and evaluated on the test set. The results revealed the following:</p>
+        
+        <ul>
+            <li><strong>Mean Absolute Error (MAE)</strong>: 16,764.3248</li>
+            <li><strong>Root Mean Squared Error (RMSE)</strong>: 29,409.7941</li>
+            <li><strong>R² Score</strong>: 0.8872</li>
+        </ul>
+
+        <p>These metrics show that the Random Forest model captures a substantial portion of the variance in housing prices, with a relatively low error rate and a high R² score, indicating good predictive accuracy.</p>
+
+        <p>To further improve the model, we performed hyperparameter tuning using GridSearchCV. We defined a parameter grid that included variations in the number of estimators, maximum depth, minimum samples for splitting, and other hyperparameters. After running the grid search, the best model was identified with the following hyperparameters:</p>
+        
+        <ul>
+            <li><strong>Bootstrap</strong>: False</li>
+            <li><strong>Max Depth</strong>: None</li>
+            <li><strong>Max Features</strong>: 'sqrt'</li>
+            <li><strong>Min Samples Leaf</strong>: 1</li>
+            <li><strong>Min Samples Split</strong>: 2</li>
+            <li><strong>Number of Estimators</strong>: 300</li>
+        </ul>
+
+        <p>This optimized model achieved the best MAE of 16,864.1182, further improving the model's performance.</p>
+
+        <p>The final evaluation of the tuned model on the test set produced the following results:</p>
+        
+        <ul>
+            <li><strong>Mean Absolute Error (MAE)</strong>: 16,764.3248</li>
+            <li><strong>Root Mean Squared Error (RMSE)</strong>: 29,409.7941</li>
+            <li><strong>R² Score</strong>: 0.8872</li>
+        </ul>
+
+        <p>These results confirm the efficacy of the Random Forest Regressor for predicting housing prices, showing significant improvement after hyperparameter tuning. The model is robust, with high accuracy and low error rates, making it a valuable tool for price prediction in this dataset.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Your Name. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
+
+
+</body>
+</html>
+
