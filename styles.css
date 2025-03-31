@@ -177,6 +177,7 @@ section img {
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
 /* Impact Section Styling */
 .impact {
     margin: 2rem 0;
@@ -224,4 +225,3 @@ section img {
     line-height: 1.6;
     margin-bottom: 1.5rem;
 }
-
