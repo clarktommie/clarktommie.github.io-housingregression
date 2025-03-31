@@ -95,12 +95,11 @@ code {
 /* radom forest background*/
 .random-forest-section {
     border: 2px solid #2980B9;
-    background-color: white;  /* Change from #ecf4f8 to white */
+    background-color: white !important;  /* Force override */
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 20px;
 }
-
 .random-forest-section ul {
     list-style-type: none;
     padding-left: 0;
