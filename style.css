@@ -7,32 +7,39 @@
 
 body {
     font-family: Arial, sans-serif;
-    line-height: 1.6;
+    background-color: #f4f7fa;
     color: #333;
-    background-color: #f4f4f4;
     padding: 20px;
 }
 
 /* Header Styling */
 header {
-    background-color: #2c3e50;
+    background-color: #1F2A44;
     color: white;
     padding: 20px;
     text-align: center;
     border-radius: 8px;
+    margin-bottom: 30px;
 }
 
 h1 {
-    font-size: 2.5em;
-    margin-bottom: 10px;
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.intro {
+    font-size: 1.2em;
+    color: #BDC3C7;
 }
 
 /* Section Styling */
 section {
     background-color: white;
     padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 8px;
+    margin-bottom: 30px;
+    border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -40,10 +47,9 @@ section {
 section h2 {
     font-size: 2rem;
     font-weight: bold;
-    color: #2980B9;
-    margin-bottom: 1rem;
+    color: #1F2A44;
     text-align: center;
-    text-transform: uppercase;
+    margin-bottom: 1rem;
     border-bottom: 3px solid #2980B9;
     padding-bottom: 8px;
 }
@@ -51,61 +57,69 @@ section h2 {
 /* Paragraph Styling */
 section p {
     font-size: 1.1rem;
-    color: #555;
+    color: #34495E;
     line-height: 1.6;
     margin-bottom: 1.5rem;
-    padding-right: 10px;
 }
 
 /* List Styling */
 section ul {
-    font-size: 1rem;
-    color: #555;
-    line-height: 1.6;
-    margin-left: 2rem;
-    margin-bottom: 1.5rem;
+    list-style-type: none;
+    margin-left: 0;
 }
 
 section ul li {
-    margin-bottom: 0.8rem;
-    padding-left: 5px;
+    font-size: 1.1em;
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+    position: relative;
 }
 
-section ul li strong {
-    color: #2c3e50;
-    font-weight: 600;
+section ul li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #2980B9;
+    font-size: 1.4em;
+    top: 0;
 }
 
-/* Border and Background for Key Sections */
-section .random-forest-section {
+/* For Code Snippets */
+code {
+    font-family: "Courier New", monospace;
+    font-size: 1rem;
+    background-color: #f4f4f4;
+    padding: 0.4rem 0.8rem;
+    border-radius: 5px;
+    color: #333;
+}
+
+/* Visual Enhancements for Specific Sections */
+.random-forest-section {
     border: 2px solid #2980B9;
     background-color: #ecf4f8;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-bottom: 20px;
 }
 
-section .metrics, section .hyperparameters {
-    background-color: #f4f6f7;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 15px;
-    margin-bottom: 15px;
+.random-forest-section ul {
+    list-style-type: none;
+    padding-left: 0;
 }
 
-section .metrics li, section .hyperparameters li {
+.random-forest-section ul li {
     font-size: 1.1em;
     color: #333;
-    margin: 8px 0;
 }
 
-section .metrics li strong, section .hyperparameters li strong {
-    color: #2c3e50;
+.random-forest-section ul li strong {
+    color: #2980B9;
 }
 
 /* Footer Styling */
 footer {
-    background-color: #2c3e50;
+    background-color: #1F2A44;
     color: white;
     text-align: center;
     padding: 10px;
@@ -115,14 +129,14 @@ footer {
     border-top: 2px solid #2980B9;
 }
 
-/* Media Queries for Mobile Devices */
+/* Responsive Design for Smaller Screens */
 @media screen and (max-width: 768px) {
     body {
-        padding: 10px;
+        padding: 15px;
     }
 
     header h1 {
-        font-size: 2em;
+        font-size: 2.5em;
     }
 
     section h2 {
@@ -132,52 +146,34 @@ footer {
     section p {
         font-size: 1rem;
     }
+
+    footer p {
+        font-size: 0.8em;
+    }
 }
 
-/* Code Styling for Snippets */
-code {
-    font-family: "Courier New", monospace;
-    font-size: 1rem;
-    background-color: #f0f0f0;
-    padding: 0.3rem 0.6rem;
-    border-radius: 4px;
+/* Clean, Professional Button Styling */
+button {
+    background-color: #2980B9;
+    color: white;
+    font-size: 1.1em;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
 }
 
-/* For Images (e.g., heatmap or model plot) */
-section .heatmap-image, section .knn-plot img, section .decision-tree-plot img, section .feature-importance-plot img {
+button:hover {
+    background-color: #3498DB;
+}
+
+/* Image Styling (for plots, charts, etc.) */
+section img {
     max-width: 100%;
     height: auto;
-    border-radius: 8px;
-    margin-top: 2rem;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Section specific to Random Forest */
-.random-forest-section {
-    background-color: #ecf4f8;
-    border: 2px solid #2980B9;
-    padding: 20px;
+    margin-top: 2rem;
     border-radius: 8px;
-    margin-bottom: 20px;
-}
-
-.random-forest-section ul {
-    list-style-type: none;
-}
-
-.random-forest-section ul li {
-    margin-bottom: 10px;
-    font-size: 1.1em;
-}
-
-.random-forest-section ul li strong {
-    color: #2980B9;
-}
-
-/* Footer */
-footer p {
-    font-size: 0.9em;
-    margin: 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
