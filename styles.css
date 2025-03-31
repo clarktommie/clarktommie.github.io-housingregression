@@ -92,14 +92,17 @@ code {
     padding: 0.4rem 0.8rem;
     border-radius: 5px;
     color: #333;
-/* radom forest background*/
+}
+
+/* Random Forest Section Styling */
 .random-forest-section {
     border: 2px solid #2980B9;
-    background-color: white !important;  /* Force override */
+    /* Background removed to inherit white from the general section rules */
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 20px;
 }
+
 .random-forest-section ul {
     list-style-type: none;
     padding-left: 0;
